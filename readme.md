@@ -7,6 +7,9 @@ This results in a portable .lnk file which will always launch the specified payl
 
 # Usage
 ```python3 lnksphinx.py <targetFile> <outFile>```
+For example, the below command will generate a .lnk that is a shortcut to .\notepad.exe. It will trigger notepad.exe when placed in the same folder. This can be used for any filetype, and packaged together with its target in order to launch it on any system the package is sent to:
+```python3 lnksphinx.py notepad.exe update.exe```
+
 
 # Explanation
 The tool uses a skeleton hex value for a .lnk file that contains unresolvable elements and modifies the hex value of the relative link target which is used when these are not found. The skeleton value defined in the bigBlob variable is shown below (in HxD) :
