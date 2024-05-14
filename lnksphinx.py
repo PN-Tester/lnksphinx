@@ -28,7 +28,7 @@ def create_lnk(target_file, out_file):
     if len(modifiedBlob) % 2 != 0:
         modifiedBlob += '00'
 
-    # Save the modified blob as a file with the user supplied <outfile> parameter value and extension .tmp
+    # Save the modified blob as a file with the user supplied <outfile> parameter value and extension .lnk
     outFileName = out_file + ".lnk"
     with open(outFileName, 'wb') as outFile:
         outFile.write(bytes.fromhex(modifiedBlob))
