@@ -3,7 +3,7 @@ Windows shortcut creation wizard will not allow you to place a relative path as 
 In some cases it can be difficult to correctly create a shortcut file that points to a relative location and works consistently to trigger another file. 
 lnksphinx is a workaround which uses a valid .lnk file skeleton as a template and modifies it dynamically based on the user supplied input. The skeleton has a ShellLinkHeader which specifies the HasRelativePath structure is present. It also has HasLinkTargetIDList value.
 The LinkTargetID structures contains ItemIDs that will never resolve, which will trigger usage of the defined relativeLink structure. The relative Link value is modified dynamically by the tool to contain the value of the payload specified by the user.
-This results in a portable .lnk file which will always launch the specified payload when it is placed adjacent to its target. This is particularly useful for red team engagements where a shortcut file is required for initial detonation of a payload, for example, triggering binaries that contain DLL hijacking vulnerabilities without having to rename the binary (which can trigger an EDR based on Masquarading behaviour detection). 
+This results in a portable .lnk file which will always launch the specified payload when it is placed adjacent to its target. This is particularly useful for red team engagements where a shortcut file is required for initial detonation of a payload, for example, triggering binaries that contain DLL hijacking vulnerabilities without having to rename the binary (which can trigger an EDR based on Masquerading behaviour detection). 
 
 # Usage
 ```python3 lnksphinx.py <targetFile> <outFile>``` 
