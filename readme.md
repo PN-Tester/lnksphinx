@@ -6,8 +6,10 @@ The LinkTargetID structures contains ItemIDs that will never resolve, which will
 This results in a portable .lnk file which will always launch the specified payload when it is placed adjacent to its target. This is particularly useful for red team engagements where a shortcut file is required for initial detonation of a payload.
 
 # Usage
-```python3 lnksphinx.py <targetFile> <outFile>```
-For example, the below command will generate a .lnk that is a shortcut to .\notepad.exe. It will trigger notepad.exe when placed in the same folder. This can be used for any filetype, and packaged together with its target in order to launch it on any system the package is sent to:
+```python3 lnksphinx.py <targetFile> <outFile>``` 
+
+For example, the below command will generate a .lnk that is a shortcut to .\notepad.exe. It will trigger notepad.exe when placed in the same folder. This can be used for any filetype, and packaged together with its target in order to launch it on any system the package is sent to: 
+
 ```python3 lnksphinx.py notepad.exe update.exe```
 
 
