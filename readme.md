@@ -7,7 +7,7 @@ This results in a portable .lnk file which will always launch the specified payl
 # Basic Usage
 ```python3 lnksphinx.py <targetFile> <outFile>``` 
 
-For example, the below command will generate a .lnk called example that is a shortcut to .\test.txt. Clicking the shortcut will open test.txt when they are located in the same directory. This can be used for any filetype, and packaged together with its target in order to launch it on any system the package is sent to: 
+For example, the below command will generate a .lnk called example that is a shortcut to .\test.txt. Clicking the shortcut will open test.txt when the file and shortcut are located in the same directory. This can be used for any filetype, and packaged together with its target in order to launch it on any system the package is sent to: 
 
 ```python3 lnksphinx.py test.txt example```
 
