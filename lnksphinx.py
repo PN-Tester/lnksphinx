@@ -91,7 +91,8 @@ def main():
     parser.add_argument("out_file", help="Output file name")
     parser.add_argument("-i", "--icon", help="Optional icon index (hex)")
     parser.add_argument("-c", "--args", help="Optional arguments to include in the .lnk")
-    parser.add_argument("-r", "--randomize", action="store_true", help="Randomize name of the unresolvable link target for increased OPSEC (default value is citrix .exe")
+    parser.add_argument("-r", "--randomize", action="store_true", help="Randomize name of the unresolvable link target for increased OPSEC. Default : citrix .exe")
+
 
     args = parser.parse_args()
 
