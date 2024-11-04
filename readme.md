@@ -38,7 +38,7 @@ When the user specifies targets and options,  the template is modified according
 ```python3 lnksphinx.py cmd.exe Update -i 49 -c "/c calc.exe"```
 
 This command will create a shortcut file pointing to an adjacent cmd.exe (in the same directory as the shortcut). It will launch the program with ```/c calc.exe``` command-line arguments, which will result in calc.exe being opened when the link is triggered. 
-A breakdown of the resultant lnk file is shown below :
+A breakdown of the resultant lnk file is shown below, with highlights placed on the data that lnksphinx has altered from the original template:
 
 ![](https://github.com/PN-Tester/lnksphinx/blob/main/annoted.PNG)
 
