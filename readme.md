@@ -42,11 +42,13 @@ A breakdown of the resultant lnk file is shown below, with highlights placed on 
 
 ![](https://github.com/PN-Tester/lnksphinx/blob/main/annoted.PNG)
 
-The file populates all the relevant stringData structures with the correctly formatted user supplied data and characterCounts. The generated lnk will have the UAC shield icon in this case (index 49).
+As seen above, the program populates all the relevant stringData structures with the correctly formatted user supplied data and characterCounts, while adjusting the LinkFlag and icon index as needed to match the supplied values. The generated lnk will have the UAC shield icon in this case (index 49).
 
-Full usage of the above command is shown in the below example :
+Demo usage of the above command is shown in the below example :
 
 ![](https://github.com/PN-Tester/lnksphinx/blob/main/LNKSPHINXDEMO.gif)
+
+The appropriate usage of this program is of course not to use it with cmd.exe /c since this defeats the purpose of the prior mentioned opsec considerations. Instead , operators are expected to either point to a executable suitable for some sort of hijacking (DLL, COM, etc.) or use the shortcut to launch various LOLBAS binaries (regasm, installutil, etc.) with the required command-line arguments to initiate detonation of a payload.
 
 # Resources
 Information about the .lnk file structure can be found in the official ms-shllink documentation : https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-shllink/16cb4ca1-9339-4d0c-a68d-bf1d6cc0f943
