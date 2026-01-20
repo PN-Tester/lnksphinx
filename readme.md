@@ -14,7 +14,7 @@ For example, the below command will generate a .lnk called example that is a sho
 # Advanced Usage
 ```python3 lnksphinx.py <targetFile> <outFile> -i <iconIndex> -c <args> -r -z```
 
-The latest update adds the -z flag which modifies the structure and appropriate shell link header data to enable detonation fromm within a compressed folder (without decompression). This version also allows users to chose from several potential icons when creating the malicious lnk file. The icons are from C:\windows\system32\imageres.dll. The optional -i parameter is used to control the index position when selecting the desired icon from this DLL.
+The latest update adds the -z flag which modifies the structure and appropriate shell link header data to enable detonation from within a compressed folder (without decompression). This version also allows users to chose from several potential icons when creating the malicious lnk file. The icons are from C:\windows\system32\imageres.dll. The optional -i parameter is used to control the index position when selecting the desired icon from this DLL.
 Additionally, the latest update adds the optional -c parameter, which is used to pass arbitrary command-line arguments to the relative link target. Finally, users can now use the -r option to randomize the 6 character name of the unresolveable primary linkTarget. This has no effect on useage but could potentially assist in eventual signature evasion.
 
 An example of advanced usage to run calc.exe, even when executed from an otherwise empty zip folder, is shown below : 
