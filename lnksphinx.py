@@ -27,9 +27,15 @@ def create_lnk(target_file, out_file, icon_index=None, args=None, randomize=Fals
     # Define Blob elements
     Blob1 = "4C0000000114020000000000C000000000000046"
     
+
     NormalHeader = "9B000800"
     IconHeader = "CB000800"
-    ArgsHeader = "EB000800"
+    ArgsIconHeader = "EB000800"
+    ArgsHeader = "AB000800"
+
+    NormalHeaderZip = "9B020800"
+    IconHeaderZip = "CB020800"
+    ArgsIconHeaderZip = "EB020800"
 
     # Generate a random 6-character string if randomize is True, else use originalName
     if randomize:
@@ -49,11 +55,26 @@ def create_lnk(target_file, out_file, icon_index=None, args=None, randomize=Fals
     )
 
     # Determine header based on icon_index and args
-    if args and icon_index:
-        header = ArgsHeader
+    if args and icon_index and zipped:
+        print("DEBUG: Using ArgsIconHeaderZip")
+        header = ArgsIconHeaderZip
+    elif icon_index and zipped:
+        print("DEBUG: Using IconHeaderZip")
+        header = IconHeaderZip
+    elif zipped:
+        print("DEBUG: Using NormalHeaderZip")
+        header = NormalHeaderZip
+    elif args and icon_index:
+        print("DEBUG: Using ArgsIconHeader")
+        header = ArgsIconHeader
     elif icon_index:
+        print("DEBUG: Using IconHeader")
         header = IconHeader
+    elif args:
+        print("DEBUG: Using ArgsHeader")
+        header = ArgsHeader
     else:
+        print("DEBUG: Using NormalHeader")
         header = NormalHeader
 
     # Construct the bigBlob with selected header and Blob parts
