@@ -18,6 +18,7 @@ The latest update adds the -z flag which modifies the structure and appropriate 
 Additionally, the latest update adds the optional -c parameter, which is used to pass arbitrary command-line arguments to the relative link target. Finally, users can now use the -r option to randomize the 6 character name of the unresolveable primary linkTarget. This has no effect on useage but could potentially assist in eventual signature evasion.
 
 An example of advanced usage to run calc.exe, even when executed from an otherwise empty zip folder, is shown below : 
+
 ```python3 lnksphinx.py %COMSPEC% Update -i 49 -c "/c calc.exe" -r -z```
 
 
