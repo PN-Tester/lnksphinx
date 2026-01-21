@@ -1,4 +1,9 @@
-# lnksphinx - Create shortcuts with relative paths
+# lnksphinx - Offensive Security LNK Creation tool
+**TLDR :**   
+* Create lnk files with relative paths for detonating adjacent files
+* Create lnk files that detonate from compressed locations without decompression
+* Create lnk files with customized icons and command line arguments
+
 Windows shortcut creation wizard will not allow you to place a relative path as a target. Furthermore, much of the functionality has been abstracted away when creating .lnk with alternatives like powershell and this can cause the creation of shortcuts that work inconsistently accross different machines. Frustratingly, several granular features of the lnk file format are simply not configurable via powershell or any other provided windows interface. Other existing third-party solutions and tricks typically use a link target like explorer.exe, msiexec.exe, or cmd.exe with arguments to run the desired relative path. While these may work in some cases they are not OPSEC friendly and rely on additional tools when the functionality is in fact already included in the .lnk file structure itself.
 lnksphinx is a workaround which uses a valid .lnk file skeleton as a template and modifies the hex content dynamically based on the user supplied input. The resultant shortcut points _directly_ to the chosen relative path. The skeleton has a ShellLinkHeader which specifies the HasRelativePath structure is present. It also has HasLinkTargetIDList value.
 The LinkTargetID structures contains ItemIDs that will never be found, which causes the shortcut to resolve the relative path instead. This relative path value is modified dynamically by the tool to contain the value of the payload specified by the user.
